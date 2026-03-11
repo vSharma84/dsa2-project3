@@ -1,3 +1,12 @@
+/***************************************************************
+  Student Name: Vansh Sharma
+  File Name: TourSolver.cpp
+  Assignment number: 3
+
+ Main driver file that creates the TourSolver object, gathers 
+ user input, and runs the brute force and genetic algorithm solutions.
+***************************************************************/
+
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
@@ -8,6 +17,13 @@ using namespace std;
 int s[20];
 int NUMELEMENTS;
 
+/*****************************************************
+Function: swapVals
+Description: Swaps two elements in the tour.
+Parameters: int i - first index
+            int j - second index
+Local Variables: int temp - temporary variable for swap
+*****************************************************/
 void swapVals(int i, int j)
 {
     int temp = s[i];
@@ -15,6 +31,12 @@ void swapVals(int i, int j)
     s[j] = temp;
 }
 
+/*****************************************************
+Function: perm1
+Description: Generates the next permutation of the tour.
+Parameters: none
+Local Variables: int m, k, p, q - indices used in permutation
+*****************************************************/
 bool perm1()
 {
     int m = NUMELEMENTS - 2;
@@ -45,10 +67,24 @@ bool perm1()
     return true;
 }
 
+/************************************************************
+Function: initialize
+Description: Prompts the user for program inputs and prepares
+             the graph and solver variables.
+************************************************************/
 void TourSolver::initialize()
 {
     cout << "Enter number of cities: ";
     cin >> numCities;
+
+    cout << "Enter number of tours per generation: ";
+    cin >> populationSize;
+
+    cout << "Enter number of generations: ";
+    cin >> generations;
+
+    cout << "Enter mutation percentage: ";
+    cin >> mutationRate;
 
     NUMELEMENTS = numCities;
 
@@ -58,6 +94,12 @@ void TourSolver::initialize()
     srand(time(NULL));
 }
 
+/********************************************************
+Function: computeCost
+Description: Computes the total distance of a tour.
+Parameters: int tour[] - order of cities in the tour
+Local Variables: double cost - total distance of the tour
+*********************************************************/
 double TourSolver::computeCost(int tour[])
 {
     double cost = 0;
@@ -70,6 +112,14 @@ double TourSolver::computeCost(int tour[])
     return cost;
 }
 
+/*******************************************************
+Function: runBruteForce
+Description: Finds the optimal tour by checking 
+             all possible permutations.
+Parameters: none
+Local Variables: double cost - cost of current tour
+                 double timeTaken - runtime of algorithm
+********************************************************/
 void TourSolver::runBruteForce()
 {
     clock_t start = clock();
@@ -92,26 +142,21 @@ void TourSolver::runBruteForce()
 
     double timeTaken = (double)(end - start) / CLOCKS_PER_SEC;
 
-    cout << "Number of cities: " << numCities << endl;
+    cout << "Number of cities run: " << numCities << endl;
     cout << "Optimal cost from brute force: " << optimalCost << endl;
-    cout << "Time for brute force: " << timeTaken << " seconds" << endl;
+    cout << "Time the brute force algorithm took: " << timeTaken << " seconds" << endl;
 }
 
+/*******************************************************
+Function: runGeneticAlgorithm
+Description: Generates random tours and uses mutation to 
+             find an approximate solution.
+Parameters: none
+Local Variables: int tour[] - generated tour
+                 double bestCost - best tour cost found
+*******************************************************/
 void TourSolver::runGeneticAlgorithm()
 {
-    int populationSize;
-    int generations;
-    int mutationRate;
-
-    cout << "Enter number of tours per generation: ";
-    cin >> populationSize;
-
-    cout << "Enter number of generations: ";
-    cin >> generations;
-
-    cout << "Enter mutation percentage: ";
-    cin >> mutationRate;
-
     clock_t start = clock();
 
     int bestTour[20];
@@ -161,7 +206,7 @@ void TourSolver::runGeneticAlgorithm()
 
     double percent = (bestCost / optimalCost) * 100;
 
-    cout << "Cost from GA: " << bestCost << endl;
-    cout << "Time GA took: " << timeTaken << " seconds" << endl;
+    cout << "Cost from the GA: " << bestCost << endl;
+    cout << "Time the GA took to run: " << timeTaken << " seconds" << endl;
     cout << "Percent of optimal: " << percent << "%" << endl;
 }

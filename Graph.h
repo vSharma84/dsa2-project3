@@ -1,3 +1,12 @@
+/***************************************************************
+  Student Name: Vansh Sharma
+  File Name: Graph.h
+  Assignment number: 3
+
+ Header file declaring the Graph class used to store and access 
+ the city distance matrix. 
+***************************************************************/
+
 #ifndef GRAPH_H
 #define GRAPH_H
 
