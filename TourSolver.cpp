@@ -77,14 +77,14 @@ void TourSolver::runBruteForce()
     for(int i = 0; i < numCities; i++)
         s[i] = i;
 
-    double bestCost = 999999999;
+    optimalCost = 999999999;
 
     do
     {
         double cost = computeCost(s);
 
-        if(cost < bestCost)
-            bestCost = cost;
+        if(cost < optimalCost)
+            optimalCost = cost;
 
     } while(perm1());
 
@@ -93,7 +93,7 @@ void TourSolver::runBruteForce()
     double timeTaken = (double)(end - start) / CLOCKS_PER_SEC;
 
     cout << "Number of cities: " << numCities << endl;
-    cout << "Optimal cost from brute force: " << bestCost << endl;
+    cout << "Optimal cost from brute force: " << optimalCost << endl;
     cout << "Time for brute force: " << timeTaken << " seconds" << endl;
 }
 
@@ -159,10 +159,7 @@ void TourSolver::runGeneticAlgorithm()
 
     double timeTaken = (double)(end - start) / CLOCKS_PER_SEC;
 
-    double percent = 0;
-
-    if(bestCost > 0)
-        percent = (bestCost / bestCost) * 100;
+    double percent = (bestCost / optimalCost) * 100;
 
     cout << "Cost from GA: " << bestCost << endl;
     cout << "Time GA took: " << timeTaken << " seconds" << endl;

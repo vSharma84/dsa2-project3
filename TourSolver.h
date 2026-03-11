@@ -3,11 +3,11 @@
 
 #include "Graph.h"
 
-class TourSolver
-{
+class TourSolver {
 private:
     Graph g;
     int numCities;
+    double optimalCost;
 
 public:
     void initialize();
