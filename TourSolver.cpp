@@ -159,7 +159,6 @@ void TourSolver::runGeneticAlgorithm()
 {
     clock_t start = clock();
 
-    int bestTour[20];
     double bestCost = 999999999;
 
     for(int gCount = 0; gCount < generations; gCount++)
@@ -193,9 +192,6 @@ void TourSolver::runGeneticAlgorithm()
             if(cost < bestCost)
             {
                 bestCost = cost;
-
-                for(int i = 0; i < numCities; i++)
-                    bestTour[i] = tour[i];
             }
         }
     }

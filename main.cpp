@@ -9,15 +9,13 @@
 
 #include "TourSolver.h"
 
-/*************************************************
+/**********************************************************
 Function: main
-Description: Runs the program by creating the
-             TourSolver object and executing the
-             algorithms.
+Description: Runs the program by creating the TourSolver object 
+             and executing the algorithms.
 Parameters: none
-Local Variables:
-    TourSolver solver - solver used to run TSP
-*************************************************/
+Local Variables:TourSolver solver - solver used to run TSP
+**********************************************************/
 int main()
 {
     TourSolver solver;
